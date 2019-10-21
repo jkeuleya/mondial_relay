@@ -12,10 +12,11 @@ module MondialRelay
   class InvalidServiceError < Error; end
 
   class ResponseError < Error
-    attr_reader :status
+    attr_reader :status, :body
 
-    def initialize(status)
+    def initialize(status, body)
       @status = status&.to_i
+      @body = body
     end
 
     def message
