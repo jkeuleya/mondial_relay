@@ -20,7 +20,7 @@ module MondialRelay
 
       with_monitoring do
         return result if StatusCodes.success?(status)
-        raise(ResponseError, status, response.body)
+        raise ResponseError.new(status, response.body)
       end
     end
 
