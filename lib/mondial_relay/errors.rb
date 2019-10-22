@@ -14,7 +14,7 @@ module MondialRelay
   class ResponseError < Error
     attr_reader :status, :body
 
-    def initialize(status, body)
+    def initialize(status, body = nil)
       @status = status&.to_i
       @body = body
     end
