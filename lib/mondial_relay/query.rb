@@ -47,7 +47,15 @@ module MondialRelay
     end
 
     def status
+      return StatusCodes.generic_service_error_code if mondial_service_fail?
+
       response_body[:stat]&.to_i
+    end
+
+    def mondial_service_fail?
+      return false unless response_body[:stat].nil?
+
+      response_body&.dig(:tracing, :ret_wsi2_sub_tracing_colis_detaille)&.all?(&:nil?)
     end
 
     def with_monitoring

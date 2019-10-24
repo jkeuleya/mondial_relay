@@ -88,6 +88,10 @@ module MondialRelay
   module StatusCodes
     module_function
 
+    def generic_service_error_code
+      99
+    end
+
     def success?(status)
       status&.zero? || (80..83).cover?(status)
     end
