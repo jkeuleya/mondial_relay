@@ -92,6 +92,10 @@ module MondialRelay
       status&.zero? || (80..83).cover?(status)
     end
 
+    def delivery_point_error?(status)
+      status == 14
+    end
+
     def message_for(status)
       STATUS_CODES[status] || 'Unknown status'
     end

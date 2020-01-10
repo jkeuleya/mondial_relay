@@ -23,4 +23,6 @@ module MondialRelay
       "#{status} - #{STATUS_CODES[status] || 'Unknown error'}"
     end
   end
+
+  class DeliveryPointError < ResponseError; end
 end
