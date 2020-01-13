@@ -15,9 +15,9 @@ RSpec.describe MondialRelay::Query, '.run' do
     {
       test_response: {
         test_result: {
-          stat: '0'
-        }
-      }
+          stat: '0',
+        },
+      },
     }
   end
 
@@ -30,5 +30,21 @@ RSpec.describe MondialRelay::Query, '.run' do
 
   it 'returns an api response' do
     expect(subject).to eq(stat: '0')
+  end
+
+  context 'with delivery point error' do
+    let(:body) do
+      {
+        test_response: {
+          test_result: {
+            stat: '14',
+          },
+        },
+      }
+    end
+
+    it 'raises delivery point error' do
+      expect { subject }.to raise_error(MondialRelay::DeliveryPointError)
+    end
   end
 end

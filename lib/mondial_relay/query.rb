@@ -20,6 +20,9 @@ module MondialRelay
 
       with_monitoring do
         return result if StatusCodes.success?(status)
+
+        raise DeliveryPointError, status if StatusCodes.delivery_point_error?(status)
+
         raise ResponseError.new(status, response.body)
       end
     end
