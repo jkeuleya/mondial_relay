@@ -25,7 +25,6 @@ module MondialRelay
           points.push(
             MondialRelay::ParcelShops::Fetch::Parse.for(line)
           )
-          return points
         end
       end
 
