@@ -8,9 +8,11 @@ module MondialRelay
     ).freeze
 
     API_URL = 'http://www.mondialrelay.fr/webservice/'
+    SFTP_HOST = 'sftp.mondialrelay.com'
 
     attr_accessor :api_url, :api_timeout, :api_max_retries,
-      :enabled_services, :debug, :monitor
+      :enabled_services, :debug, :monitor,
+      :sftp_host, :sftp_password, :sftp_user, :sftp_connect_timeout
 
     attr_reader :http_adapter
 
