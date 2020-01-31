@@ -2,8 +2,8 @@
 
 module MondialRelay
   module ParcelShops
-    class Fetch
-      class Parse
+    class FetchAll
+      class ParseLine
         include Interactor::Initializer
 
         initialize_with :line
@@ -37,7 +37,7 @@ module MondialRelay
         private
 
         def name
-          line.slice(10, 31)
+          line.slice(10, 31).strip
         end
 
         def relais_number
@@ -45,13 +45,15 @@ module MondialRelay
         end
 
         def address
-          line.slice(336, 31)
+          line.slice(336, 31).strip
         end
 
         def address_additional
-          "#{line.slice(367, 31)} " \
-          "#{line.slice(398, 31)} " \
-          "#{line.slice(429, 31)}"
+          [
+            line.slice(367, 31).strip,
+            line.slice(398, 31).strip,
+            line.slice(429, 31).strip,
+          ].reject { |line| line.empty? }.join(' ')
         end
 
         def country
@@ -63,7 +65,7 @@ module MondialRelay
         end
 
         def city
-          line.slice(465, 26)
+          line.slice(465, 26).strip
         end
 
         def latitude
@@ -117,7 +119,7 @@ module MondialRelay
           starts_at = line.slice(position, 10).strip
           ends_at = line.slice(position + 10, 10).strip
 
-          return if starts_at.blank?  && ends_at.blank?
+          return if starts_at.blank? && ends_at.blank?
 
           {
             starts_at: starts_at,

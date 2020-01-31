@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe MondialRelay::ParcelShops::Fetch, '.for' do
+RSpec.describe MondialRelay::ParcelShops::FetchAll, '.for' do
   subject { described_class.for }
 
   let(:connection) { double(:connection) }
@@ -9,8 +9,13 @@ RSpec.describe MondialRelay::ParcelShops::Fetch, '.for' do
   let(:line) { double(:line) }
   let(:lines) { [line] }
   let(:result) { double(:result) }
+  let(:config) { build(:configuration) }
 
   before do
+    allow(MondialRelay)
+      .to receive(:config)
+      .and_return(config)
+
     expect(MondialRelay)
       .to receive_message_chain(:sftp_client, :with_connection)
       .and_yield(connection)
@@ -22,13 +27,13 @@ RSpec.describe MondialRelay::ParcelShops::Fetch, '.for' do
 
     expect(connection)
       .to receive(:download!)
-      .with(described_class::RELAIS_PATH, tempfile_path)
+      .with(config.sftp_relais_path, tempfile_path)
 
     expect(tempfile)
       .to receive_message_chain(:readlines, :drop)
       .and_return(lines)
 
-    expect(MondialRelay::ParcelShops::Fetch::Parse)
+    expect(MondialRelay::ParcelShops::FetchAll::ParseLine)
       .to receive(:for)
       .with(line)
       .and_return(result)

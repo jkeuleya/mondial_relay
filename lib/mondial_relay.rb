@@ -29,8 +29,8 @@ require 'mondial_relay/parcel_shops/search/format_response'
 require 'mondial_relay/parcel_shops/search/translations'
 require 'mondial_relay/parcel_shops/search/defaults'
 
-require 'mondial_relay/parcel_shops/fetch'
-require 'mondial_relay/parcel_shops/fetch/parse'
+require 'mondial_relay/parcel_shops/fetch_all'
+require 'mondial_relay/parcel_shops/fetch_all/parse_line'
 
 require 'mondial_relay/labels/create'
 require 'mondial_relay/labels/create/translations'

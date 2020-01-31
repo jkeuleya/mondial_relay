@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe MondialRelay::ParcelShops::Fetch::Parse, '.for' do
+RSpec.describe MondialRelay::ParcelShops::FetchAll::ParseLine, '.for' do
   subject { described_class.for(line) }
 
 
@@ -9,11 +9,11 @@ RSpec.describe MondialRelay::ParcelShops::Fetch::Parse, '.for' do
   end
 
   let(:relais_number) { '00105' }
-  let(:name) { "CHAUSSURES RICHE#{' ' * 15}" }
-  let(:address) { "CHAUSSURES RICHE#{' ' * 15}" }
-  let(:address_additional) { "#{' ' * 32}FAUBOURG SAINT GERMAIN 18#{' ' * 38}"}
+  let(:name) { 'CHAUSSURES RICHE' }
+  let(:address) { 'CHAUSSURES RICHE' }
+  let(:address_additional) { 'FAUBOURG SAINT GERMAIN 18' }
   let(:country) { 'BE' }
-  let(:city) { "COUVIN#{' ' * 20}" }
+  let(:city) { 'COUVIN' }
   let(:postal_code) { '5660' }
   let(:latitude) { 50.051884 }
   let(:longitude) { 4.495008 }

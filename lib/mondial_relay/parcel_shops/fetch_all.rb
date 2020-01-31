@@ -2,16 +2,15 @@
 
 module MondialRelay
   module ParcelShops
-    class Fetch
+    class FetchAll
       include Interactor::Initializer
 
-      RELAIS_PATH = '/depuismrelay/relais.txt'
       FILENAME = 'relais.txt'
 
       def run
         MondialRelay.sftp_client.with_connection do |conn|
           Tempfile.create(FILENAME) do |file|
-            conn.download!(RELAIS_PATH, file.path)
+            conn.download!(relais_path, file.path)
 
             parse_file(file)
           end
@@ -20,15 +19,17 @@ module MondialRelay
 
       private
 
+      def relais_path
+        MondialRelay.config.sftp_relais_path
+      end
+
       def parse_file(file)
-        lines(file).each_with_object([]) do |line, points|
-          points.push(
-            MondialRelay::ParcelShops::Fetch::Parse.for(line)
-          )
+        lines_without_header(file).map do |line|
+          MondialRelay::ParcelShops::FetchAll::ParseLine.for(line)
         end
       end
 
-      def lines(file)
+      def lines_without_header(file)
         file.readlines.drop(1)
       end
     end
