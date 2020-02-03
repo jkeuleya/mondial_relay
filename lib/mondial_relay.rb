@@ -7,6 +7,7 @@ require 'mondial_relay/errors'
 require 'mondial_relay/status_codes'
 require 'mondial_relay/security_code'
 require 'mondial_relay/client'
+require 'mondial_relay/sftp_client'
 require 'mondial_relay/request'
 require 'mondial_relay/query'
 require 'mondial_relay/account'
@@ -27,6 +28,9 @@ require 'mondial_relay/parcel_shops/search/format_params'
 require 'mondial_relay/parcel_shops/search/format_response'
 require 'mondial_relay/parcel_shops/search/translations'
 require 'mondial_relay/parcel_shops/search/defaults'
+
+require 'mondial_relay/parcel_shops/fetch_all'
+require 'mondial_relay/parcel_shops/fetch_all/parse_line'
 
 require 'mondial_relay/labels/create'
 require 'mondial_relay/labels/create/translations'
@@ -75,5 +79,9 @@ module MondialRelay
   def monitor(monitorable)
     return unless config.monitor.respond_to?(:call)
     config.monitor.call(monitorable)
+  end
+
+  def sftp_client
+    @sftp_client ||= SftpClient.new
   end
 end
