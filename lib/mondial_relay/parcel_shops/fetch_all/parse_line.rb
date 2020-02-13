@@ -37,7 +37,7 @@ module MondialRelay
         private
 
         def name
-          line.slice(10, 31).strip
+          line.slice(336, 31).strip
         end
 
         def relais_number
@@ -45,15 +45,14 @@ module MondialRelay
         end
 
         def address
-          line.slice(336, 31).strip
-        end
-
-        def address_additional
           [
             line.slice(367, 31).strip,
             line.slice(398, 31).strip,
-            line.slice(429, 31).strip,
           ].reject { |line| line.empty? }.join(' ')
+        end
+
+        def address_additional
+          line.slice(429, 31).strip
         end
 
         def country
