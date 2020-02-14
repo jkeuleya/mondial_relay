@@ -10,8 +10,8 @@ RSpec.describe MondialRelay::ParcelShops::FetchAll::ParseLine, '.for' do
 
   let(:relais_number) { '00105' }
   let(:name) { 'CHAUSSURES RICHE' }
-  let(:address) { 'CHAUSSURES RICHE' }
-  let(:address_additional) { 'FAUBOURG SAINT GERMAIN 18' }
+  let(:address) { 'FAUBOURG SAINT GERMAIN 18' }
+  let(:address_additional) { '' }
   let(:country) { 'BE' }
   let(:city) { 'COUVIN' }
   let(:postal_code) { '5660' }
