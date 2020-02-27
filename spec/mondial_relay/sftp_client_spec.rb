@@ -11,7 +11,7 @@ RSpec.describe MondialRelay::SftpClient do
         password: config.sftp_password,
         non_interactive: true,
         port: described_class::SFTP_PORT,
-      }
+      }.compact
     end
 
     before do

@@ -11,6 +11,7 @@ module MondialRelay
 
     SFTP_HOST = 'sftp.mondialrelay.com'
     SFTP_RELAIS_PATH = '/depuismrelay/relais.txt'
+    SFTP_CONNECT_TIMEOUT = 10
 
     attr_accessor :api_url, :api_timeout, :api_max_retries,
       :enabled_services, :debug, :monitor,
@@ -29,6 +30,7 @@ module MondialRelay
 
       @sftp_host = SFTP_HOST
       @sftp_relais_path = SFTP_RELAIS_PATH
+      @sftp_connect_timeout = SFTP_CONNECT_TIMEOUT
 
       @debug = false
       @monitor = nil
