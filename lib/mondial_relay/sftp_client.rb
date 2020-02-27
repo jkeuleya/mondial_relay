@@ -30,7 +30,7 @@ module MondialRelay
         password: password,
         non_interactive: true,
         port: SFTP_PORT,
-      }
+      }.compact
     end
 
     def connect_timeout
