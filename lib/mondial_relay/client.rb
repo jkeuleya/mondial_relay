@@ -51,7 +51,7 @@ module MondialRelay
           return yield
         rescue Savon::Error => e
           raise ClientError.new(e.message)  if i + 1 == max_retries
-        rescue Net::OpenTimeout, Net::ReadTimeout => e
+        rescue Net::OpenTimeout, Net::ReadTimeout, ::Errno::ETIMEDOUT => e
           raise TimeoutError.new(e.message) if i + 1 == max_retries
         end
       end
