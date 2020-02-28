@@ -34,5 +34,16 @@ RSpec.describe MondialRelay::Client do
         expect { subject }.to raise_error MondialRelay::TimeoutError
       end
     end
+
+    context 'when request time out with ::Errno::ETIMEDOUT' do
+      before do
+        stub_request(:get, client.wsdl_url)
+        allow(client.soap_client).to receive(:call).and_raise(::Errno::ETIMEDOUT)
+      end
+
+      it 'raises an error' do
+        expect { subject }.to raise_error MondialRelay::TimeoutError
+      end
+    end
   end
 end
