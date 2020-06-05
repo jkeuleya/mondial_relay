@@ -8,6 +8,8 @@ module MondialRelay
 
         initialize_with :line
 
+        DATE_FORMAT = '%d.%m.%Y'
+
         WEEKDAYS = %i(
           monday
           tuesday
@@ -30,7 +32,7 @@ module MondialRelay
             latitude: latitude,
             longitude: longitude,
             business_hours: business_hours,
-            holiday_information: holiday_information,
+            holiday_information: closure_periods,
           }
         end
 
@@ -101,6 +103,23 @@ module MondialRelay
           {
             opens_at: "#{opens_at[0..1]}:#{opens_at[2..3]}",
             closes_at: "#{closes_at[0..1]}:#{closes_at[2..3]}",
+          }
+        end
+
+        def closure_periods
+          holiday_information.push(final_closure_date).compact
+        end
+
+        def final_closure_date
+          ends_at = line.slice(72, 10).strip
+
+          return if ends_at.blank?
+
+          starts_at = Date.parse(ends_at) - 1
+
+          {
+            starts_at: starts_at.strftime(DATE_FORMAT),
+            ends_at: ends_at,
           }
         end
 

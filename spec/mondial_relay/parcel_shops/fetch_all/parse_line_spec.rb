@@ -101,4 +101,27 @@ RSpec.describe MondialRelay::ParcelShops::FetchAll::ParseLine, '.for' do
   end
 
   it { is_expected.to eq(result) }
+
+  context 'with a final closure date' do
+    let(:line) do
+      'D1RL00105 CHAUSSURES RICHE               521080676252108     D12.10.201702.02.202010.07.202011.07.2020                                                            21.07.2018                                                                                           Ma/Me/J/V/S 9:30-12 13:30-18                                  9904X     XCHAUSSURES RICHE                                              FAUBOURG SAINT GERMAIN 18                                     5660 COUVIN                    521081700N0000000000000000093012001330180009301200133018000930120013301800093012001330180009301200133018000000000000000000NONNNOOBE                         003001      R09245127+0500518840+0044950080                                                                                                                                                                                                                                                                                                                      '
+    end
+
+    let(:holiday_information) do
+      [
+        {
+          starts_at: '10.07.2020',
+          ends_at: '11.07.2020',
+        },
+        {
+          starts_at: '01.02.2020',
+          ends_at: '02.02.2020',
+        },
+      ]
+    end
+
+    it 'parses final closure date' do
+      expect(subject[:holiday_information]).to eq(holiday_information)
+    end
+  end
 end
