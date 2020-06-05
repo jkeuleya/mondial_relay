@@ -3,3 +3,5 @@ bin/
 doc/
 pkg/
 Gemfile.lock
+Gemfile
+mondial_relay.gemspec
