@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'interactor-initializer', '~> 0.2'
   spec.add_runtime_dependency 'savon', '~> 2.12'
 
-  spec.add_development_dependency 'bundler', '~> 2.0'
+  spec.add_development_dependency 'bundler', '~> 1.0'
   spec.add_development_dependency 'factory_bot', '~> 5.0'
   spec.add_development_dependency 'pronto', '~> 0.10'
   spec.add_development_dependency 'pronto-flay'
