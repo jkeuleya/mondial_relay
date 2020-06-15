@@ -32,7 +32,8 @@ module MondialRelay
             latitude: latitude,
             longitude: longitude,
             business_hours: business_hours,
-            holiday_information: closure_periods,
+            holiday_information: holiday_information,
+            temporarily_closed: temporarily_closed?,
           }
         end
 
@@ -106,21 +107,14 @@ module MondialRelay
           }
         end
 
-        def closure_periods
-          holiday_information.push(final_closure_date).compact
+        def temporarily_closed?
+          return false if final_closure_date.blank?
+
+          true
         end
 
         def final_closure_date
-          ends_at = line.slice(72, 10).strip
-
-          return if ends_at.blank?
-
-          starts_at = Date.parse(ends_at) - 1
-
-          {
-            starts_at: starts_at.strftime(DATE_FORMAT),
-            ends_at: ends_at,
-          }
+          line.slice(72, 10).strip
         end
 
         def holiday_information
